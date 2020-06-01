@@ -83,8 +83,7 @@ for i in range(numberoftask-1):
 
 ##placeholder only can be executed by disable eager execution
 #tf.compat.v1.disable_eager_execution()
-#
-#
+
 ## Reset the whole tensorflow graph
 #tf.compat.v1.reset_default_graph()
 
