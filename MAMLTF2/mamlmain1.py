@@ -52,15 +52,15 @@ tf.random.set_seed(S)
 
 system_rate = 60
 k_train = 300
-x_train1, t_train1, x_val1, t_val1,input_nm, target_nm, data_length, DELAY_SIZE, train_eule_data, anticipation_size, train_time_data = taskcaller_train1('trainingtask1.csv', system_rate, k_train)
-x_train2, t_train2, x_val2, t_val2,_, _, _, _, _, _, _ = taskcaller_train1('trainingtask2.csv', system_rate, k_train)
-x_train3, t_train3, x_val3, t_val3,_, _, _, _, _, _, _ = taskcaller_train1('trainingtask3.csv', system_rate, k_train)
-x_train4, t_train4, x_val4, t_val4, _, _, _, _, _, _, _ = taskcaller_train1('trainingtask4.csv', system_rate, k_train)
-x_train5, t_train5, x_val5, t_val5,_, _, _, _, _, _, _ = taskcaller_train1('trainingtask5.csv', system_rate, k_train)
-x_train6, t_train6, x_val6, t_val6,_, _, _, _, _, _, _ = taskcaller_train1('trainingtask6.csv', system_rate, k_train)
-x_train7, t_train7, x_val7, t_val7,_, _, _, _, _, _, _ = taskcaller_train1('trainingtask7.csv', system_rate, k_train)
-x_train8, t_train8, x_val8, t_val8,_, _, _, _, _, _, _ = taskcaller_train1('trainingtask8.csv', system_rate, k_train)
-x_train9, t_train9, x_val9, t_val9,_, _, _, _, _, _, _ = taskcaller_train1('trainingtask9.csv', system_rate, k_train)
+x_train1, t_train1, x_val1, t_val1,input_nm, target_nm, data_length, DELAY_SIZE, train_eule_data, anticipation_size, train_time_data = taskcaller_train1('../dataset/trainingtask1.csv', system_rate, k_train)
+x_train2, t_train2, x_val2, t_val2,_, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask2.csv', system_rate, k_train)
+x_train3, t_train3, x_val3, t_val3,_, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask3.csv', system_rate, k_train)
+x_train4, t_train4, x_val4, t_val4, _, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask4.csv', system_rate, k_train)
+x_train5, t_train5, x_val5, t_val5,_, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask5.csv', system_rate, k_train)
+x_train6, t_train6, x_val6, t_val6,_, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask6.csv', system_rate, k_train)
+x_train7, t_train7, x_val7, t_val7,_, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask7.csv', system_rate, k_train)
+x_train8, t_train8, x_val8, t_val8,_, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask8.csv', system_rate, k_train)
+x_train9, t_train9, x_val9, t_val9,_, _, _, _, _, _, _ = taskcaller_train1('../dataset/trainingtask9.csv', system_rate, k_train)
 #x_seq10, t_seq10, _, _,_, _, _, _, _, _, _ = taskcaller('trainingtask10.csv', system_rate, k)
 
 
