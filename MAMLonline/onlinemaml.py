@@ -42,15 +42,15 @@ system_rate = 60
 k_train = 300
 n_eval = 100
 xtask_train1, ytask_train1,xtask_val1,ytask_val1, dtrainx1, dtrainy1, dtestx1, dtesty1,input_nm, target_nm, data_length, DELAY_SIZE, train_eule_data, anticipation_size, train_time_data = taskcaller_train('trainingtask1.csv', system_rate, k_train, n_eval)
-xtask_train2, ytask_train2,xtask_val2,ytask_val2, dtrainx2, dtrainy2, dtestx2, dtesty2,_, _, _, _, _, _, _ = taskcaller_train('trainingtask2.csv', system_rate, k_train, n_eval)
-xtask_train3, ytask_train3,xtask_val3,ytask_val3, dtrainx3, dtrainy3, dtestx3, dtesty3,_, _, _, _, _, _, _ = taskcaller_train('trainingtask3.csv', system_rate, k_train, n_eval)
-xtask_train4, ytask_train4,xtask_val4,ytask_val4, dtrainx4, dtrainy4, dtestx4, dtesty4, _, _, _, _, _, _, _ = taskcaller_train('trainingtask4.csv', system_rate, k_train, n_eval)
-xtask_train5, ytask_train5,xtask_val5,ytask_val5, dtrainx5, dtrainy5, dtestx5, dtesty5,_, _, _, _, _, _, _ = taskcaller_train('trainingtask5.csv', system_rate, k_train, n_eval)
-xtask_train6, ytask_train6,xtask_val6,ytask_val6, dtrainx6, dtrainy6, dtestx6, dtesty6,_, _, _, _, _, _, _ = taskcaller_train('trainingtask6.csv', system_rate, k_train, n_eval)
-xtask_train7, ytask_train7,xtask_val7,ytask_val7, dtrainx7, dtrainy7, dtestx7, dtesty7,_, _, _, _, _, _, _ = taskcaller_train('trainingtask7.csv', system_rate, k_train, n_eval)
-xtask_train8, ytask_train8,xtask_val8,ytask_val8, dtrainx8, dtrainy8, dtestx8, dtesty8,_, _, _, _, _, _, _ = taskcaller_train('trainingtask8.csv', system_rate, k_train, n_eval)
-xtask_train9, ytask_train9,xtask_val9,ytask_val9, dtrainx9, dtrainy9, dtestx9, dtesty9,_, _, _, _, _, _, _ = taskcaller_train('trainingtask9.csv', system_rate, k_train, n_eval)
-xtask_train10, ytask_train10,xtask_val10,ytask_val10, dtrainx10, dtrainy10, dtestx10, dtesty10,_, _, _, _, _, _, _ = taskcaller_train('trainingtask10.csv', system_rate, k_train,n_eval)
+xtask_train2, ytask_train2,xtask_val2,ytask_val2, dtrainx2, dtrainy2, dtestx2, dtesty2,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask2.csv', system_rate, k_train, n_eval)
+xtask_train3, ytask_train3,xtask_val3,ytask_val3, dtrainx3, dtrainy3, dtestx3, dtesty3,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask3.csv', system_rate, k_train, n_eval)
+xtask_train4, ytask_train4,xtask_val4,ytask_val4, dtrainx4, dtrainy4, dtestx4, dtesty4, _, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask4.csv', system_rate, k_train, n_eval)
+xtask_train5, ytask_train5,xtask_val5,ytask_val5, dtrainx5, dtrainy5, dtestx5, dtesty5,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask5.csv', system_rate, k_train, n_eval)
+xtask_train6, ytask_train6,xtask_val6,ytask_val6, dtrainx6, dtrainy6, dtestx6, dtesty6,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask6.csv', system_rate, k_train, n_eval)
+xtask_train7, ytask_train7,xtask_val7,ytask_val7, dtrainx7, dtrainy7, dtestx7, dtesty7,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask7.csv', system_rate, k_train, n_eval)
+xtask_train8, ytask_train8,xtask_val8,ytask_val8, dtrainx8, dtrainy8, dtestx8, dtesty8,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask8.csv', system_rate, k_train, n_eval)
+xtask_train9, ytask_train9,xtask_val9,ytask_val9, dtrainx9, dtrainy9, dtestx9, dtesty9,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask9.csv', system_rate, k_train, n_eval)
+xtask_train10, ytask_train10,xtask_val10,ytask_val10, dtrainx10, dtrainy10, dtestx10, dtesty10,_, _, _, _, _, _, _ = taskcaller_train('../dataset/trainingtask10.csv', system_rate, k_train,n_eval)
 #x_seq10, t_seq10, _, _,_, _, _, _, _, _, _ = taskcaller('trainingtask10.csv', system_rate, k)
 
 

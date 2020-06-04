@@ -90,7 +90,7 @@ def taskcaller_train1 (filename, system_rate, k):
     # Normalized input and target series (updated)
     #input_norm = preprocessing.scale(input_series)
     normalizer = preprocessing.StandardScaler()
-    normalizer.fit(input_series)
+    normalizer.fit(input_series) 
     input_norm = normalizer.transform(input_series)
     
     
