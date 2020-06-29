@@ -32,7 +32,7 @@ def copy_model(model, x):
 
 def model_func(model, x_train, t_train): #compute loss
     y_pred = model(x_train)
-    loss = tf.losses.MeanSquaredError()(y_pred,t_train)
+    loss = tf.losses.MeanAbsoluteError()(y_pred,t_train)
     return y_pred, loss
 
 #@tf.function
@@ -45,45 +45,53 @@ def train_batch(x, y, model, optimizer):
     return loss, model
 
 #@tf.function()
-def train_maml (model, epochs, traintaskx, traintaskt,valtaskx, valtaskt, lr_inner = 0.01, lr_outer_max = 0.02, log_step = 100):
+def train_maml (model, epochs, traintaskx, traintaskt,valtaskx, valtaskt, inner_loop = 1, lr_inner = 0.001, lr_outer_max = 0.001, log_step = 100, ca = False):
     losses = []
+    lr_outer = lr_outer_max
     print("Training is starting")
     for epoch in range (epochs):
-        total_loss = 0 
         outer_loss = 0
-        lr_outer = cosine_annealing(epoch, epochs, lr_outer_max)
+        if ca :
+            lr_outer = cosine_annealing(epoch, epochs, lr_outer_max/10)
+            print(lr_outer)
+        
+            
         opt_outer = keras.optimizers.Adam(learning_rate=lr_outer)
         with tf.GradientTape() as outer_tape: 
-            for i in range (len(traintaskx)): #for all dataset t with size i
-                x = traintaskx[i]
-                y = traintaskt[i] #convert dataset into tensor
+            x = traintaskx[0]
+            model_copy = copy_model(model,x)
+            for _ in range(inner_loop):
+                for i in range (len(traintaskx)): #for all dataset t with size i
+                
+                    x = traintaskx[i]
+                    y = traintaskt[i] #convert dataset into tensor
+ 
+                    model(x)#forward pass to initialize weights
+                    #step 5
+                    with tf.GradientTape() as inner_tape:
+                        _,inner_loss = model_func(model, x, y)
+                    #step 6
+                    gradients2 = inner_tape.gradient(inner_loss, model.trainable_variables)
+                    
+                    k = 0
+                    for j in range(len(model_copy.layers)):
+                        if j % 2 == 0:
+                            model_copy.layers[j].kernel = tf.subtract(model.layers[j].kernel, tf.multiply(lr_inner, gradients2[k]))
+                            model_copy.layers[j].bias = tf.subtract(model.layers[j].bias, tf.multiply(lr_inner, gradients2[k+1]))
+                            k += 2
+            for i in range(len(valtaskx)):
                 xval = valtaskx[i]
                 yval = valtaskt[i]
-                model(x)#forward pass to initialize weights
-                #step 5
-                with tf.GradientTape() as inner_tape:
-                    _,inner_loss = model_func(model, x, y)
-                #step 6
-                gradients2 = inner_tape.gradient(inner_loss, model.trainable_variables)
-                model_copy = copy_model(model,x)
-                k = 0
-                for j in range(len(model_copy.layers)):
-                    if j % 2 == 0:
-                        model_copy.layers[j].kernel = tf.subtract(model.layers[j].kernel, tf.multiply(lr_inner, gradients2[k]))
-                        model_copy.layers[j].bias = tf.subtract(model.layers[j].bias, tf.multiply(lr_inner, gradients2[k+1]))
-                        k += 2
-                _, test_loss = model_func(model_copy, xval, yval)
-                outer_loss += test_loss
+                _, loss = model_func(model_copy, xval, yval)
+                outer_loss = (outer_loss+loss)/(i+1)     
 
         gradients = outer_tape.gradient(outer_loss, model.trainable_variables)
         opt_outer.apply_gradients(zip(gradients, model.trainable_variables))
-        total_loss = outer_loss
-        loss = total_loss / (len(traintaskx))
-        losses.append(loss)
-        print('Step{} : loss = {}'.format(epoch,loss))
+        losses.append(outer_loss)
+        print('Step {} : loss = {}'.format(epoch,outer_loss))
     return model, losses
 
-def orderone (model, epochs, traintaskx, traintaskt, valtaskx, valtaskt, lr_inner = 0.0001, lr_outer_max = 0.0001, log_step = 100, inner_loop=10):
+def orderone (model, epochs, traintaskx, traintaskt, valtaskx, valtaskt, lr_inner = 0.01, lr_outer_max = 0.01, log_step = 100, inner_loop=10):
     losses = []
     print("Training is starting")
     for epoch in range (epochs):
@@ -93,12 +101,12 @@ def orderone (model, epochs, traintaskx, traintaskt, valtaskx, valtaskt, lr_inne
         x_sample = traintaskx[0]
         model(x_sample)
         model_copy = copy_model(model, x_sample)
-        with tf.GradientTape() as outer_tape:
+        with tf.GradientTape() as outer_tape: 
             for i in range(len(traintaskx)):
                 x = traintaskx[i]
                 y = traintaskt[i] #convert dataset into tensor
 
-                for i in range(inner_loop):
+                for _ in range(inner_loop):
                     with tf.GradientTape() as inner_tape:
                         
                         _, inner_loss = model_func(model_copy, x, y)

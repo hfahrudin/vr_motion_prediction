@@ -2,7 +2,7 @@
 """
 Created on Thu Apr  9 14:29:55 2020
 
-@author: WFS
+@author: WFS , HF
 """
 
 
@@ -73,14 +73,6 @@ valtaskt = t_val1+t_val2+t_val3+t_val4+t_val5+t_val6+t_val7+t_val8+t_val9
 
 numberoftask = len(traintaskx)
 
-#pretrain_x = tf.concat([x_train1, x_train2, x_train3, x_train4, x_train5, x_train6, x_train7, x_train8, x_train9],0)
-#pretrain_t = tf.concat([t_train1, t_train2, t_train3, t_train4, t_train5, t_train6, t_train7, t_train8, t_train9],0)
-
-pretrain_x = traintaskx[0]
-pretrain_t = traintaskt[0]
-for i in range(numberoftask-1):
-    pretrain_x = tf.concat([pretrain_x,traintaskx[i]],0)
-    pretrain_t = tf.concat([pretrain_t,traintaskt[i]],0)
 
 ##placeholder only can be executed by disable eager execution
 #tf.compat.v1.disable_eager_execution()
@@ -112,7 +104,6 @@ TRAINED_MODEL_NAME = 'best_net'
 
 
 start_time = time.time()
-
 _, losses_1= orderone(model, epochs, traintaskx, traintaskt, valtaskx, valtaskt,inner_loop=1)
 _, losses_3= orderone(model, epochs, traintaskx, traintaskt, valtaskx, valtaskt,inner_loop=3)
 _, losses_4= orderone(model, epochs, traintaskx, traintaskt, valtaskx, valtaskt, inner_loop=6)
